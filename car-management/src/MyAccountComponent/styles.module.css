@@ -1,0 +1,115 @@
+/* styles.module.css */
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.userData {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.userInfo {
+  font-size: 18px;
+  color: #555;
+  margin: 0px 0px 10px;
+}
+
+.userInfo span {
+  font-weight: bold;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.carListTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buttonGroupCreate {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.editButton, .createButton, .deleteButton {
+  height: 40px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-radius: 0px;
+  border: 1px solid #000;
+  background-color: #efefef;
+  color: #000;
+}
+
+.updateInfoButton {
+  height: 40px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-radius: 0px;
+  border: 1px solid #000;
+  background-color: #efefef;
+  color: #000;
+}
+
+.editButton:hover, .createButton:hover, .updateInfoButton:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.deleteButton:hover {
+  background-color: rgb(194, 0, 0);
+  color: #fff;
+}
+
+.carTable {
+  width: 100%;
+}
+
+.carTable thead tr th {
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  width: 20%;
+}
+
+.carTable thead tr th:nth-child(5) {
+  text-align: center;
+}
+
+.carTable tbody tr td {
+  padding: 10px;
+  box-sizing: border-box;
+}

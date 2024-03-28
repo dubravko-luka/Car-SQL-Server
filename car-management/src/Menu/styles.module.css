@@ -1,0 +1,61 @@
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    /* background-color: #f0f0f0; */
+    height: 74px;
+  }
+  
+  .logo img {
+    width: 50px; /* Kích thước logo */
+    border-radius: 50%;
+  }
+  
+  .menuItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+  }
+  
+  .menuItem, .link {
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .menuItem.active {
+    border: 1px solid #000;
+    background: #f0f0f0;
+  }
+
+  .menuItem:hover, .link:hover {
+    border: 1px solid #000;
+  }
+
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .avatar img {
+    width: 40px; /* Kích thước avatar */
+    margin-right: 10px; /* Khoảng cách giữa avatar và tên tài khoản */
+  }
+  
+  .account {
+    color: #333; /* Màu chữ tài khoản */
+  }
+  
+
+  .link {
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+  }

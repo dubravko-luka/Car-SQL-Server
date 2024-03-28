@@ -1,0 +1,97 @@
+/* styles.module.css */
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    margin: auto;
+    max-width: 700px;
+    width: 100%;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.buttonGroup {
+    text-align: center;
+}
+
+.backButton {
+    margin-bottom: 10px;
+}
+
+.createButton,
+.backButton {
+    height: 40px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-radius: 0px;
+  border: 1px solid #000;
+  background-color: #efefef;
+  color: #000;
+}
+
+.createButton:hover,
+.backButton:hover {
+    background-color: #0056b3;
+  color: #fff;
+}
+
+.select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.carTable {
+    width: 100%;
+}
+
+.carTable tbody tr td:nth-child(1) {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 30%;
+}
+
+.carTable tbody tr td:nth-child(2) {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 70%;
+}
+
+.carTable .input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 0;
+    margin-top: 10px;
+}
+
+.carTable .select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 0;
+    margin-top: 10px;
+}

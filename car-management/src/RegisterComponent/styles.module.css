@@ -1,0 +1,50 @@
+/* styles.module.css */
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 74px - 10px);
+}
+
+.container {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: #f0f0f0;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #333;
+}
+
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
