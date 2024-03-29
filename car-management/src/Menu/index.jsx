@@ -28,7 +28,7 @@ const HorizontalMenu = () => {
     } else {
       setLoged(false)
     }
-
+    // eslint-disable-next-line
   }, [location.pathname]);
 
   return (
