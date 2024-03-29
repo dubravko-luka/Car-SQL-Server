@@ -27,86 +27,69 @@ const RandomCarsComponent = () => {
 
     return (
         <>
-            <h2 className={styles.title}>Xe mới đăng</h2>
+            <div className="flex justify-between items-center">
+                <h2 className={styles.title}>Xe mới đăng</h2>
+                <Link className={styles.viewAll} to="/car">Xem tất cả →</Link>
+            </div>
             <div className={`${styles.list}`}>
                 {randomCars.map((car, index) => (
-                    <div key={index} className={styles.carItem}>
-                        <div className={`${styles.wrapImgCar}`}>
-                            <img
-                                className={styles.imgCar}
-                                src={
-                                    car.image ?? 'https://img.freepik.com/premium-vector/car-logo-vector-illustration_762078-124.jpg'
-                                }
-                                alt=""
-                            />
+                    <Link
+                        className={styles.link}
+                        to={{
+                            pathname: `/car/detail/${car.car_id}`,
+                            state: { from: '/car' }
+                        }}
+                    >
+                        <div key={index} className={styles.carItem}>
+                            <div key={index} className={`${styles.wrapImgCar}`}>
+                                <img
+                                    className={styles.imgCar}
+                                    src={
+                                        car.image ?? 'https://img.freepik.com/premium-vector/car-logo-vector-illustration_762078-124.jpg'
+                                    }
+                                    alt=""
+                                />
+                            </div>
+                            <div className={`${styles.contentItemCar}`}>
+                                <table border={0} className={styles.table}>
+                                    <tbody>
+                                        <tr>
+                                            <td colSpan={2}>
+                                                <span className={styles.titleCar}>{car.car_name}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span style={{ fontSize: '16px', color: '#000' }}>Giá xe</span>
+                                            </td>
+                                            <td>
+                                                <span style={{ fontWeight: 'bold', color: '#00498D', fontSize: '18px', textAlign: 'right' }}>{formatCurrency(car.price)} VNĐ</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan={2}>
+                                                <span style={{ fontSize: '12px', color: '#077DC2' }}>Chưa bao gồm thuế, phí</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan={2}>
+                                                <div className={`${styles.showRoom}`}>
+
+                                                    <div className={`${styles.avatar}`}>
+                                                        <img src={car.creator_avatar} alt="" />
+                                                    </div>
+                                                    <span style={{ fontWeight: 'bold', fontSize: '14px', color: '#000' }}>
+                                                        {car.creator_first_name} {car.creator_last_name}
+                                                    </span>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div className={`${styles.contentItemCar}`}>
-                            <table border={1} className={styles.table}>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <span>Tên xe</span>
-                                        </td>
-                                        <td>
-                                            <span>{car.car_name}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Thương hiệu</span>
-                                        </td>
-                                        <td>
-                                            <span>{car.brand}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Mẫu xe</span>
-                                        </td>
-                                        <td>
-                                            <span>{car.model}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Năm sản xuất</span>
-                                        </td>
-                                        <td>
-                                            <span>{car.year}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Giá</span>
-                                        </td>
-                                        <td>
-                                            <span>{formatCurrency(car.price)}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Showroom</span>
-                                        </td>
-                                        <td>
-                                            <span>{car.creator_detail}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan={2} style={{ textAlign: 'center' }}>
-                                            <Link
-                                                to={{
-                                                    pathname: `/car/detail/${car.car_id}`,
-                                                    state: { from: '/' }
-                                                }}
-                                            >
-                                                <span>Xem chi tiết</span>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
             {

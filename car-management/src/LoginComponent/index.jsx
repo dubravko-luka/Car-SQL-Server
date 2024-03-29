@@ -57,7 +57,7 @@ function LoginComponent() {
         }
       }
     };
-  
+
     // eslint-disable-next-line
     verifyToken();
 
@@ -67,13 +67,24 @@ function LoginComponent() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h2>Login</h2>
-        {error.username && <div className='error'>{error.username}</div>}
-        <input className={styles.input} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        {error.password && <div className='error'>{error.password}</div>}
-        <input className={styles.input} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button className={styles.button} onClick={handleLogin}>Login</button>
-        <Link to={'/register'} className={styles.register}>Register</Link>
+        <div className={`${styles.wrapTitle}`}>
+          <div className={`${styles.titleContent}`}>
+            <div className={`${styles.title} ${styles.active}`}>Login</div>
+            <Link to={'/register'}>
+              <div className={styles.title}>
+                Register
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div className={`${styles.content}`}>
+          {error.username && <div className='error'>{error.username}</div>}
+          <input className={styles.input} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          {error.password && <div className='error'>{error.password}</div>}
+          <input className={styles.input} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button className={styles.button} onClick={handleLogin}>Login</button>
+        </div>
       </div>
     </div>
   );

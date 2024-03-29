@@ -82,7 +82,6 @@
 
 .carListTitle {
   font-size: 20px;
-  margin-bottom: 10px;
   color: #333;
 }
 
@@ -96,15 +95,13 @@
 .buttonGroupCreate {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.editButton,
-.createButton,
-.deleteButton {
+.editButton, .createButton, .deleteButton {
   height: 40px;
-  width: 120px;
+  width: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,6 +110,26 @@
   border-radius: 20px;
   background: var(--linear);
   color: #fff;
+  border: 0px;
+  cursor: pointer;
+}
+
+.editButton,
+.deleteButton {
+  height: 30px;
+  border-radius: 5px;
+}
+
+.editButton {
+  background: rgb(255, 174, 0);
+}
+
+.deleteButton {
+  background: rgb(255, 0, 0);
+}
+
+.createButton {
+  width: 120px;
 }
 
 .updateInfoButton {
@@ -134,7 +151,17 @@
 }
 
 .carTable {
+  margin-top: 20px;
   width: 100%;
+  border-collapse: collapse;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, .7);
+  border-radius: 5px;
+  overflow: hidden;
+  border-color: #c8c8c8;
+}
+
+.carTable thead {
+  background: #bababa;
 }
 
 .carTable thead tr th {
@@ -142,10 +169,15 @@
   box-sizing: border-box;
   text-align: left;
   width: 20%;
+  color: #000;
 }
 
 .carTable thead tr th:nth-child(5) {
   text-align: center;
+}
+
+.carTable tbody tr:hover {
+  background: #e4e4e4;
 }
 
 .carTable tbody tr td {
@@ -153,41 +185,6 @@
   box-sizing: border-box;
 }
 
-.wrapTab {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.tab {
-  width: 150px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  position: relative;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.tab:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0%;
-  width: 0%;
-  height: 2px;
-  background: var(--linear);
-  transition: all .3s linear;
-}
-
-.tab.active:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0%;
-  width: 80%;
-  height: 2px;
-  background: var(--linear);
+.noData {
+  height: 100px;
 }

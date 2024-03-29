@@ -40,10 +40,10 @@ const RandomNewsComponent = () => {
                 {randomNews.map((news, index) => (
                     <div key={index} className={styles.carItem}>
                         <div className={`${styles.contentItemCar}`}>
-                            <table border={1} className={styles.table}>
+                            <table border={0} className={styles.table}>
                                 <tbody>
                                     <tr>
-                                        <td>
+                                        <td className={`${styles.titleTable}`}>
                                             <span style={{ fontWeight: 'bold' }}>{news.title}</span>
                                         </td>
                                     </tr>
@@ -53,13 +53,6 @@ const RandomNewsComponent = () => {
                                                 <div className={styles.contentNews} dangerouslySetInnerHTML={{ __html: news.content }} />
                                             </div>
                                             {!showFullContent && <div className={styles.more}></div>}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan={2} style={{ textAlign: 'center' }}>
-                                            <Link to={`/news/detail/${news.news_id}`}>
-                                                <span>Xem chi tiết</span>
-                                            </Link>
                                         </td>
                                     </tr>
                                 </tbody>

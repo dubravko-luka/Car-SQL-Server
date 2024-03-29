@@ -52,24 +52,34 @@ function RegisterComponent() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h2>Register</h2>
-        {error.phone && <div className='error'>{error.phone}</div>}
-        <input className={styles.input} type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <div className={`${styles.wrapTitle}`}>
+          <div className={`${styles.titleContent}`}>
+            <Link to={'/login'}>
+              <div className={styles.title}>
+                Login
+              </div>
+            </Link>
+            <div className={`${styles.title} ${styles.active}`}>Register</div>
+          </div>
+        </div>
+        <div className={`${styles.content}`}>
+          {error.phone && <div className='error'>{error.phone}</div>}
+          <input className={styles.input} type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
-        {error.first_name && <div className='error'>{error.first_name}</div>}
-        <input className={styles.input} type="text" placeholder="Firstname" value={first_name} onChange={(e) => setFirstName(e.target.value)} />
+          {error.first_name && <div className='error'>{error.first_name}</div>}
+          <input className={styles.input} type="text" placeholder="Firstname" value={first_name} onChange={(e) => setFirstName(e.target.value)} />
 
-        {error.last_name && <div className='error'>{error.last_name}</div>}
-        <input className={styles.input} type="text" placeholder="Lastname" value={last_name} onChange={(e) => setLastName(e.target.value)} />
+          {error.last_name && <div className='error'>{error.last_name}</div>}
+          <input className={styles.input} type="text" placeholder="Lastname" value={last_name} onChange={(e) => setLastName(e.target.value)} />
 
-        {error.username && <div className='error'>{error.username}</div>}
-        <input className={styles.input} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          {error.username && <div className='error'>{error.username}</div>}
+          <input className={styles.input} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
 
-        {error.password && <div className='error'>{error.password}</div>}
-        <input className={styles.input} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          {error.password && <div className='error'>{error.password}</div>}
+          <input className={styles.input} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-        <button className={styles.button} onClick={handleRegister}>Register</button>
-        <Link to={'/login'} className={styles.register}>Login</Link>
+          <button className={styles.button} onClick={handleRegister}>Register</button>
+        </div>
       </div>
     </div>
   );

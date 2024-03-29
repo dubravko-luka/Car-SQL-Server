@@ -41,14 +41,9 @@
     box-sizing: border-box;
     text-decoration: none;
     border-radius: 0px;
-    border: 1px solid #000;
-    background-color: #efefef;
-    color: #000;
-}
-
-.createButton:hover,
-.backButton:hover {
-    background-color: #0056b3;
+    border: 0px;
+    border-radius: 20px;
+    background: var(--linear);
     color: #fff;
 }
 
@@ -61,7 +56,16 @@
 }
 
 .carTable {
+    margin-top: 20px;
     width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, .5);
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+
+.carTable td label {
+    font-weight: bold;
 }
 
 .carTable tbody tr td:nth-child(1) {
@@ -78,20 +82,24 @@
 
 .carTable .input {
     width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
+    height: 40px;
+    padding: 0px 20px;
     box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .5);
 }
 
 .carTable .select {
     width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
+    height: 40px;
+    padding: 0px 20px;
     box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .5);
 }

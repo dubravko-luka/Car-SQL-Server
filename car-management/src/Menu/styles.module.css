@@ -23,19 +23,44 @@
   .menuItem, .link {
     font-weight: bold;
     text-decoration: none;
-    border: 1px solid transparent;
     padding: 10px 20px;
     color: #333;
     text-decoration: none;
+    position: relative;
+  }
+
+  .menuItem:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(140deg, #a945af 25%, #f4439b);
+    transition: all .3s linear;
   }
 
   .menuItem.active {
-    border: 1px solid #000;
-    background: #f0f0f0;
+    background: var(--text-header, linear-gradient(140deg, #a945af 25%, #f4439b));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .menuItem.active:before {
+    width: 50%;
   }
 
   .menuItem:hover, .link:hover {
-    border: 1px solid #000;
+    background: var(--text-header, linear-gradient(140deg, #a945af 25%, #f4439b ));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .menuItem:hover:before {
+    width: 50%;
   }
 
   .avatar {
@@ -43,10 +68,20 @@
     align-items: center;
     justify-content: center;
   }
+
+  .wrapAvtarImg {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
   
-  .avatar img {
-    width: 40px; /* Kích thước avatar */
-    margin-right: 10px; /* Khoảng cách giữa avatar và tên tài khoản */
+  .wrapAvtarImg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   
   .account {

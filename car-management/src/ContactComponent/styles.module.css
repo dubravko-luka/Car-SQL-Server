@@ -1,3 +1,5 @@
+/* styles.module.css */
+
 .wrapper {
     width: 100%;
     margin: 0 auto;
@@ -21,42 +23,6 @@
     text-align: center;
 }
 
-.formTable {
-    width: 100%;
-}
-
-.formTable tbody tr td:nth-child(1) {
-    padding: 10px;
-    box-sizing: border-box;
-    width: 30%;
-}
-
-.formTable tbody tr td:nth-child(2) {
-    padding: 10px;
-    box-sizing: border-box;
-    width: 70%;
-}
-
-.formTable input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0;
-    margin-top: 10px;
-}
-
-.formTable select {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0;
-    margin-top: 10px;
-}
-
 .buttonGroup {
     text-align: center;
 }
@@ -75,13 +41,76 @@
     box-sizing: border-box;
     text-decoration: none;
     border-radius: 0px;
-    border: 1px solid #000;
-    background-color: #efefef;
-    color: #000;
+    border: 0px;
+    border-radius: 20px;
+    background: var(--linear);
+    color: #fff;
 }
 
-.createButton:hover,
-.backButton:hover {
-    background-color: #0056b3;
-    color: #fff;
+.select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.carTable {
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, .5);
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+
+.carTable td label {
+    font-weight: bold;
+}
+
+.carTable tbody tr td:nth-child(1) {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 30%;
+}
+
+.carTable tbody tr td:nth-child(2) {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 70%;
+}
+
+.carTable .input {
+    width: 100%;
+    height: 40px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .5);
+}
+
+.carTable .select {
+    width: 100%;
+    height: 40px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .5);
+}
+
+.carTable textarea.input {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .5);
 }

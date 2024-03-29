@@ -8,7 +8,7 @@
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 15px;
 }
 
 .carItem {
@@ -23,11 +23,25 @@
 .table {
     width: 100%;
     height: 100%;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, .7);
+    border-radius: 5px;
+    border-collapse: collapse;
+    overflow: hidden;
 }
 
 .table tbody tr td {
-    padding: 5px 10px;
+    padding: 0px 10px 10px;
     box-sizing: border-box;
+}
+
+.titleTable {
+    padding: 10px 10px!important;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.titleTable span {
+    font-size: 18px;
 }
 
 .table tbody tr td span {
@@ -45,7 +59,7 @@
 
 .more {
     position: absolute;
-    background: linear-gradient(0deg, rgba(0, 0, 0, .8) 20%, rgba(0, 0, 0, 0));
+    background: linear-gradient(0deg, rgba(0, 0, 0, .7) 10%, rgba(0, 0, 0, 0));
     bottom: 0;
     left: 0;
     width: 100%;

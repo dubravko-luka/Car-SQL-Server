@@ -24,7 +24,6 @@ const UpdateUserInfo = () => {
         axios.defaults.headers.common['Authorization'] = `${token}`;
 
         const response = await axios.get('/myaccount');
-        console.log('-----TSX---->', response.data);
         setUserInfo({
           ...response.data,
           password: ''
@@ -74,7 +73,7 @@ const UpdateUserInfo = () => {
         avatar: userInfo.avatar,
         first_name: userInfo.first_name,
         last_name: userInfo.last_name,
-        password: userInfo.password,
+        ...userInfo.password && userInfo.password !== '' ? { password: userInfo.password} : {},
       }).then((res) => {
         history.push('/myaccount')
         toastUpdateSuccess(loading, 'Cập nhật thành công')
@@ -94,7 +93,7 @@ const UpdateUserInfo = () => {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Link to="/myaccount" className={styles.backButton}>Quay lại</Link>
             </div>
-            <table border={1} className={styles.carTable}>
+            <table border={0} className={styles.carTable}>
               <tbody>
                 <tr>
                   <td colSpan={2}>
@@ -136,7 +135,15 @@ const UpdateUserInfo = () => {
                     <input type="text" name="phone" onChange={handleChange} value={userInfo.phone} className={styles.input} />
                   </td>
                 </tr>
-
+                <tr>
+                  <td>
+                    <label>Ảnh đại diện</label>
+                  </td>
+                  <td>
+                    {error.avatar && <div className='error'>{error.avatar}</div>}
+                    <input type="text" name="avatar" onChange={handleChange} value={userInfo.avatar} className={styles.input} />
+                  </td>
+                </tr>
                 <tr>
                   <td>
                     <label>Mật khẩu</label>
@@ -145,47 +152,6 @@ const UpdateUserInfo = () => {
                     <input type="password" name="password" onChange={handleChange} value={userInfo.password} className={styles.input} />
                   </td>
                 </tr>
-
-                {/* <tr>
-                  <td>
-                    <label>Thương hiệu</label>
-                  </td>
-                  <td>
-                    <select value={brandId} onChange={(e) => setBrandId(e.target.value)} className={styles.select}>
-                      <option value="">Thương hiệu</option>
-                      {carBrands.map(brand => (
-                        <option key={brand.brand_id} value={brand.brand_id}>{brand.brand_name}</option>
-                      ))}
-                    </select>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <label>Mẫu xe</label>
-                  </td>
-                  <td>
-                    <input type="text" placeholder="Model" value={model} onChange={(e) => setModel(e.target.value)} className={styles.input} />
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <label>Năm sản xuất</label>
-                  </td>
-                  <td>
-                    <input type="number" placeholder="Year" value={year} onChange={(e) => setYear(e.target.value)} className={styles.input} />
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <label>Mô tả</label>
-                  </td>
-                  <td>
-                    <textarea style={{ resize: 'vertical' }} placeholder="Mô tả" value={carDescription} onChange={(e) => setCarDesription(e.target.value)} className={styles.input} />
-                  </td>
-                </tr> */}
                 <tr>
                   <td colSpan={2}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -13,17 +13,11 @@ const ContactForm = () => {
   });
   const [error, setError] = useState({});
 
-  const formatCurrency = (value) => {
-    const cleanValue = value.replace(/[^\d]/g, ''); // Loại bỏ ký tự không phải số
-    const formattedValue = Number(cleanValue).toLocaleString('vi-VN'); // Định dạng số theo tiêu chuẩn Việt Nam
-    return formattedValue;
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setContactInfo(prevState => ({
       ...prevState,
-      [name]: name === 'price_range' ? formatCurrency(value) : value
+      [name]: value
     }));
   };
 
@@ -31,11 +25,11 @@ const ContactForm = () => {
     setError(prevState => (
       {
         ...prevState,
-        garage_id: !contactInfo.garage_id?.trim() ? 'Hình ảnh là bắt buộc' : '',
-        full_name: !contactInfo.full_name?.trim() ? 'Tên xe là bắt buộc' : '',
-        gender: !contactInfo.gender?.trim() ? 'Thương hiệu là bắt buộc' : '',
-        price_range: !contactInfo.price_range?.trim() ? 'Mẫu xe là bắt buộc' : '',
-        phone: !contactInfo.phone?.trim() ? 'Năm sản xuất là bắt buộc' : '',
+        garage_id: !contactInfo.garage_id?.trim() ? 'Garage là bắt buộc' : '',
+        full_name: !contactInfo.full_name?.trim() ? 'Tên là bắt buộc' : '',
+        gender: !contactInfo.gender?.trim() ? 'Giới tính là bắt buộc' : '',
+        price_range: !contactInfo.price_range?.trim() ? 'Khoảng giá là bắt buộc' : '',
+        phone: !contactInfo.phone?.trim() ? 'Số điện thoại là bắt buộc' : '',
       }
     ));
 
@@ -51,10 +45,7 @@ const ContactForm = () => {
 
     const loading = toastPending('Đang đăng ký')
     try {
-      await axios.post('/contacts', {
-        ...contactInfo,
-        price_range: contactInfo.price_range.replace(/[.,]/g, "")
-      }).then((res) => {
+      await axios.post('/contacts', contactInfo).then((res) => {
         toastUpdateSuccess(loading, 'Đăng ký thành công')
         setContactInfo({
           garage_id: '',
@@ -83,7 +74,7 @@ const ContactForm = () => {
       const token = localStorage.getItem('token');
       axios.defaults.headers.common['Authorization'] = `${token}`;
 
-      const response = await axios.get('/users');
+      const response = await axios.get('/users-exa');
       setUserList(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -94,7 +85,7 @@ const ContactForm = () => {
     <div className={styles.wrapper}>
       <div style={{ width: '100%' }}>
         <div className={styles.container}>
-          <table border={1} className={styles.formTable}>
+          <table border={0} className={styles.carTable}>
             <tbody>
               <tr>
                 <td colSpan={2}>
@@ -102,29 +93,33 @@ const ContactForm = () => {
                 </td>
               </tr>
               <tr>
-                <td><label htmlFor="selectedUser">Chọn Showroom</label></td>
                 <td>
-                {error.garage_id && <div className='error'>{error.garage_id}</div>}
-                  <select id="selectedUser" name="garage_id" value={contactInfo.garage_id} onChange={handleChange}>
+                  <label htmlFor="selectedUser">Chọn Showroom</label>
+                </td>
+                <td>
+                  {error.garage_id && <div className='error'>{error.garage_id}</div>}
+                  <select id="selectedUser" name="garage_id" value={contactInfo.garage_id} onChange={handleChange} className={styles.select}>
                     <option value="">-- Showroom --</option>
                     {userList.map(user => (
-                      <option key={user.user_id} value={user.user_id}>{user.username}</option>
+                      <option key={user.user_id} value={user.user_id}>{user.first_name} {user.last_name}</option>
                     ))}
                   </select>
                 </td>
               </tr>
               <tr>
-                <td><label htmlFor="fullName">Tên quý khách:</label></td>
+                <td>
+                  <label htmlFor="fullName">Tên quý khách:</label>
+                  </td>
                 <td>
                   {error.full_name && <div className='error'>{error.full_name}</div>}
-                  <input type="text" id="fullName" name="full_name" value={contactInfo.full_name} onChange={handleChange} />
+                  <input type="text" id="fullName" name="full_name" value={contactInfo.full_name} onChange={handleChange} className={styles.input} />
                 </td>
               </tr>
               <tr>
                 <td><label htmlFor="gender">Giới tính:</label></td>
                 <td>
-                {error.gender && <div className='error'>{error.gender}</div>}
-                  <select id="gender" name="gender" value={contactInfo.gender} onChange={handleChange}>
+                  {error.gender && <div className='error'>{error.gender}</div>}
+                  <select id="gender" name="gender" value={contactInfo.gender} onChange={handleChange} className={styles.select}>
                     <option value="">-- Giới Tính --</option>
                     <option value="male">Nam</option>
                     <option value="female">Nữ</option>
@@ -135,15 +130,15 @@ const ContactForm = () => {
               <tr>
                 <td><label htmlFor="priceRange">Giá khoảng:</label></td>
                 <td>
-                {error.price_range && <div className='error'>{error.price_range}</div>}
-                  <input type="text" id="priceRange" name="price_range" value={contactInfo.price_range} onChange={handleChange} />
+                  {error.price_range && <div className='error'>{error.price_range}</div>}
+                  <input type="text" id="priceRange" name="price_range" value={contactInfo.price_range} onChange={handleChange} className={styles.input} />
                 </td>
               </tr>
               <tr>
                 <td><label htmlFor="phone">Phone:</label></td>
                 <td>
-                {error.phone && <div className='error'>{error.phone}</div>}
-                <input type="phone" id="phone" name="phone" value={contactInfo.phone} onChange={handleChange} />
+                  {error.phone && <div className='error'>{error.phone}</div>}
+                  <input type="phone" id="phone" name="phone" value={contactInfo.phone} onChange={handleChange} className={styles.input} />
                 </td>
               </tr>
               <tr>

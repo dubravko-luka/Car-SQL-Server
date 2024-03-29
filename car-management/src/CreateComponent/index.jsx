@@ -9,11 +9,13 @@ function CarFormComponent() {
   const [image, setImage] = useState('');
   const [carName, setCarName] = useState('');
   const [brandId, setBrandId] = useState('');
+  const [cateId, setCateId] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
   const [carDescription, setCarDesription] = useState('');
   const [carBrands, setCarBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
   const history = useHistory();
   const [error, setError] = useState({});
 
@@ -24,10 +26,17 @@ function CarFormComponent() {
   };
 
   useEffect(() => {
-    // Lấy danh sách các hãng xe từ API carBrands
     axios.get('/carBrands')
       .then(response => {
         setCarBrands(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    axios.get('/categories')
+      .then(response => {
+        setCategories(response.data);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -45,6 +54,7 @@ function CarFormComponent() {
         model: !model?.trim() ? 'Mẫu xe là bắt buộc' : '',
         year: !year?.trim() ? 'Năm sản xuất là bắt buộc' : '',
         price: !price?.trim() ? 'Giá là bắt buộc' : '',
+        cateId: !cateId?.trim() ? 'Danh mục là bắt buộc' : '',
       }
     ));
 
@@ -54,13 +64,14 @@ function CarFormComponent() {
       !brandId?.trim() ||
       !model?.trim() ||
       !year?.trim() ||
-      !price?.trim()
+      !price?.trim() ||
+      !cateId?.trim()
     ) {
       return;
     }
 
     const loading = toastPending('Đang tạo')
-    axios.post('/cars/create', { car_name: carName, brand_id: brandId, model, image, year, price: price.replace(/[.,]/g, ""), car_description: JSON.stringify(carDescription) })
+    axios.post('/cars/create', { car_name: carName, brand_id: brandId, cate_id: cateId, model, image, year, price: price.replace(/[.,]/g, ""), car_description: JSON.stringify(carDescription) })
       .then(response => {
         toastUpdateSuccess(loading, 'Tạo thành công')
         history.push('/myaccount')
@@ -80,7 +91,7 @@ function CarFormComponent() {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Link to="/myaccount" className={styles.backButton}>Quay lại</Link>
             </div>
-            <table border={1} className={styles.carTable}>
+            <table border={0} className={styles.carTable}>
               <tbody>
                 <tr>
                   <td colSpan={2}>
@@ -105,6 +116,21 @@ function CarFormComponent() {
                   <td>
                     {error.carName && <div className='error'>{error.carName}</div>}
                     <input type="text" placeholder="Car name" value={carName} onChange={(e) => setCarName(e.target.value)} className={styles.input} />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <label>Danh mục</label>
+                  </td>
+                  <td>
+                    {error.cateId && <div className='error'>{error.cateId}</div>}
+                    <select value={cateId} onChange={(e) => setCateId(e.target.value)} className={styles.select}>
+                      <option value="">Danh mục</option>
+                      {categories.map(cate => (
+                        <option key={cate.cate_id} value={cate.cate_id}>{cate.cate_name}</option>
+                      ))}
+                    </select>
                   </td>
                 </tr>
 
@@ -158,7 +184,13 @@ function CarFormComponent() {
                     <label>Mô tả</label>
                   </td>
                   <td>
-                    <textarea style={{ resize: 'vertical' }} placeholder="Mô tả" value={carDescription} onChange={(e) => setCarDesription(e.target.value)} className={styles.input} />
+                    <textarea
+                      style={{ resize: 'vertical' }}
+                      placeholder="Mô tả"
+                      value={carDescription}
+                      onChange={(e) => setCarDesription(e.target.value)}
+                      className={styles.input}
+                    />
                   </td>
                 </tr>
                 <tr>

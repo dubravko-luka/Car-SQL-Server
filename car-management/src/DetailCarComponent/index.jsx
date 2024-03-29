@@ -11,6 +11,7 @@ function CarDetailComponent() {
     useEffect(() => {
         axios.get(`/cars/detail/${params.id}`)
             .then(response => {
+                console.log('-----TSX---->', response.data);
                 setCarDetail(response.data);
             })
             .catch(error => {
@@ -32,16 +33,16 @@ function CarDetailComponent() {
     return (
         <div className={`${styles.wrapper}`}>
             <div className={`${styles.container}`}>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Link to={location?.state?.from ?? '/'} className={styles.backButton}>Quay lại</Link>
+                <Link to={location?.state?.from ?? '/'} className={styles.backButton}>Quay lại</Link>
+                <div className={styles.detailNameCar}>
+                    <h2 className={styles.title}>{carDetail.car_name}</h2>
                 </div>
-                <h2 className={styles.title}>Chi tiết xe </h2>
                 <div className={styles.detailPage}>
                     <table border={0}>
                         <tbody>
-                            <tr style={{ display: 'flex' }}>
+                            <tr style={{ display: 'flex', width: '100%' }}>
                                 <td className={styles.tdImg}>
-                                    <table border={1} className={styles.table2} style={{ height: '400px' }}>
+                                    <table border={0} className={styles.table2} style={{ height: '400px' }}>
                                         <tr style={{ background: '#fff' }}>
                                             <td style={{ padding: 0 }}>
                                                 <div className={`${styles.wrapImg}`}>
@@ -56,40 +57,79 @@ function CarDetailComponent() {
                                         </tr>
                                     </table>
                                 </td>
-                                <td style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0px', width: '50%' }}>
-                                    <table border={1} className={styles.table2}>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tên xe</td>
-                                                <td>{carDetail.car_name}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Thương hiệu</td>
-                                                <td>{carDetail.brand_detail}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mẫu xe</td>
-                                                <td>{carDetail.model}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Năm sản xuất</td>
-                                                <td>{carDetail.year}</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <span>Giá</span>
-                                                </td>
-                                                <td>
-                                                    <span>{formatCurrency(carDetail.price)}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Showroom</td>
-                                                <td>{carDetail.creator_detail}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <td className={styles.tdInfo}>
+                                    <div className={styles.tdInfoDiv}>
+                                        <table border={0} className={styles.table2}>
+                                            <tbody>
+                                                <tr className='flex justify-between w-full'>
+                                                    <td>
+                                                        <span style={{ fontSize: '13px' }}>Giá bán</span>
+                                                    </td>
+                                                    <td>
+                                                        <span style={{ fontWeight: 'bold' }}>{formatCurrency(carDetail.price)} VNĐ</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style={{ paddingTop: '0px' }}>
+                                                        <span style={{ fontSize: '10px', color: 'rgb(2 119 189)' }}>Chưa gồm thuế, phí</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className={styles.tdInfoDiv}>
+                                        <table border={0} className={styles.table2}>
+                                            <tbody>
+                                                <tr className='flex justify-between w-full'>
+                                                    <td>
+                                                        <span style={{ fontSize: '13px' }}>Danh mục xe</span>
+                                                    </td>
+                                                    <td>
+                                                        <span style={{ fontWeight: 'bold' }}>{carDetail.cate_name}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr className='flex justify-between w-full'>
+                                                    <td>
+                                                        <span style={{ fontSize: '13px' }}>Thương hiệu</span>
+                                                    </td>
+                                                    <td>
+                                                        <span style={{ fontWeight: 'bold' }}>{carDetail.brand_name}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr className='flex justify-between w-full'>
+                                                    <td>
+                                                        <span style={{ fontSize: '13px' }}>Mẫu xe</span>
+                                                    </td>
+                                                    <td>
+                                                        <span style={{ fontWeight: 'bold' }}>{carDetail.model}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className={styles.tdInfoDiv}>
+                                        <table border={0} className={styles.table2}>
+                                            <tbody>
+                                            <tr className='flex justify-between w-full'>
+                                                    <td colSpan={2}>
+                                                        <span style={{ fontWeight: 'bold' }}>Người bán</span>
+                                                    </td>
+                                                </tr>
+                                                <tr className='flex justify-between w-full'>
+                                                    <td colSpan={2}>
+                                                        <div className={`${styles.showRoom}`}>
+                                                            <div className={`${styles.avatar}`}>
+                                                                <img src={carDetail.creator_avatar} alt="" />
+                                                            </div>
+                                                            <span style={{ fontWeight: 'bold', fontSize: '14px', color: '#000' }}>
+                                                                {carDetail.creator_first_name} {carDetail.creator_last_name}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

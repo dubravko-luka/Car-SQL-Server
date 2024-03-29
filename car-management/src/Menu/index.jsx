@@ -48,7 +48,11 @@ const HorizontalMenu = () => {
       {/* Avatar and Account */}
       <div className={styles.avatar}>
         {
-          loged && <Link to="/myaccount"><img src={userData.avatar} alt="Avatar" /></Link>
+          loged && <Link styles={{ marginRight: '10px' }} to="/myaccount">
+            <div className={`${styles.wrapAvtarImg}`}>
+              <img src={userData.avatar} alt="Avatar" />
+            </div>
+          </Link>
         }
         {
           loged
