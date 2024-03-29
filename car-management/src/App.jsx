@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import LoginComponent from './LoginComponent';
 import RegisterComponent from './RegisterComponent';
@@ -14,10 +14,15 @@ import ContactComponent from './ContactComponent'
 import HomeComponent from './HomeComponent'
 import DetailNewsComponent from './DetailNewsComponent'
 import Menu from './Menu'
+import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+
+  useEffect(() => {
+    axios.defaults.baseURL = 'https://api-car.demo-website.click'
+  }, [])
 
   return (
     <>
