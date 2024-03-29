@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom'
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://api-car.demo-website.click'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
