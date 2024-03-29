@@ -509,388 +509,50 @@ BEGIN
     ORDER BY NEWID();
 END;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- CAR LIST
-CREATE VIEW CarList AS
-SELECT c.car_id, c.car_name, b.brand_name AS brand, b.brand_id AS brand_id , c.model, c.image, c.year, c.price, CONCAT_WS(' ', u.first_name, u.last_name) AS creator
-FROM Cars c
-INNER JOIN CarBrands b ON c.brand_id = b.brand_id
-LEFT JOIN Users u ON c.creator_id = u.user_id;
-
--- CAR BRAND
-CREATE PROCEDURE GetCarBrands
-AS
-BEGIN
-    SELECT * FROM CarBrands;
-END;
-
-
--- MY ACCOUNT
-CREATE PROCEDURE GetUserByUsername
-    @p_username VARCHAR(50)
-AS
-BEGIN
-    DECLARE @user_count INT;
-
-    -- Check if the username exists exactly once in the Users table
-    SELECT @user_count = COUNT(*) FROM Users WHERE username = @p_username;
-
-    -- If there is exactly one user with the given username
-    IF @user_count = 1
-    BEGIN
-        SELECT * FROM Users WHERE username = @p_username;
-    END
-    ELSE
-    BEGIN
-        -- Return an error message if no user is found or if there are multiple users with the same username
-        RAISERROR ('Error: Username does not match exactly one user', 16, 1);
-    END
-END;
-
-
--- MY CARS
-CREATE PROCEDURE GetCarsByUserId
-    @userId INT
-AS
-BEGIN
-    SELECT 
-        Cars.car_id,
-        Cars.car_name,
-        CarBrands.brand_name AS brand,
-        Cars.model,
-        Cars.image,
-        Cars.year,
-        Cars.price,
-        Users.username AS creator
-    FROM 
-        Cars
-    INNER JOIN 
-        CarBrands ON Cars.brand_id = CarBrands.brand_id
-    LEFT JOIN 
-        Users ON Cars.creator_id = Users.user_id
-    WHERE 
-        Cars.creator_id = @userId;
-END;
-
-
-
--- CREATE CAR
-CREATE PROCEDURE InsertCar
-    @carName VARCHAR(100),
-    @brandId INT,
-    @model VARCHAR(50),
-    @year INT,
-    @creatorId INT,
-    @price NVARCHAR(50),
-    @car_description TEXT,
-    @image TEXT
-AS
-BEGIN
-    DECLARE @brandExist INT;
-    DECLARE @userExist INT;
-
-    -- Check if the brand_id exists
-    SELECT @brandExist = COUNT(*) FROM CarBrands WHERE brand_id = @brandId;
-
-    -- Check if the creator_id exists
-    SELECT @userExist = COUNT(*) FROM Users WHERE user_id = @creatorId;
-
-    IF @brandExist = 0
-    BEGIN
-        RAISERROR('Brand does not exist', 16, 1);
-        RETURN;
-    END
-    ELSE IF @userExist = 0
-    BEGIN
-        RAISERROR('User does not exist', 16, 1);
-        RETURN;
-    END
-    ELSE
-    BEGIN
-        INSERT INTO Cars (car_name, brand_id, model, year, creator_id, car_description, image, price) 
-        VALUES (@carName, @brandId, @model, @year, @creatorId, @car_description, @image, @price);
-    END
-END;
-
---DROP PROCEDURE IF EXISTS InsertCar;
-
-
--- CAR DETAIL
-CREATE PROCEDURE GetCarDetail
-    @carId INT
-AS
-BEGIN
-    SELECT 
-        Cars.car_id,
-        Cars.car_name,
-        CarBrands.brand_id,
-        CarBrands.brand_name AS brand_detail,
-        Cars.model,
-        Cars.image,
-        Cars.year,
-        Cars.price,
-        Cars.car_description,
-        Users.user_id AS creator_id,
-        CONCAT(Users.first_name, ' ', Users.last_name) AS creator_detail
-    FROM 
-        Cars
-    INNER JOIN 
-        CarBrands ON Cars.brand_id = CarBrands.brand_id
-    LEFT JOIN 
-        Users ON Cars.creator_id = Users.user_id
-    WHERE 
-        Cars.car_id = @carId;
-END;
-
---DROP PROCEDURE IF EXISTS GetCarDetail;
-
-
--- CAR EDIT
-CREATE PROCEDURE EditCar
-    @carId INT,
-    @carName VARCHAR(100),
-    @brandId INT,
-    @model VARCHAR(50),
-    @carYear INT,
-    @car_description TEXT,
-    @image TEXT,
-    @price NVARCHAR(50)
-AS
-BEGIN
-    UPDATE Cars 
-    SET car_name = @carName,
-        brand_id = @brandId,
-        model = @model,
-        year = @carYear,
-        price = @price,
-        car_description = @car_description,
-        image = @image
-    WHERE car_id = @carId;
-END;
-
---DROP PROCEDURE IF EXISTS EditCar;
-
--- DELETE CAR
-CREATE PROCEDURE DeleteCar
-    @carId INT
-AS
-BEGIN
-    BEGIN TRY
-        DELETE FROM Cars WHERE car_id = @carId;
-    END TRY
-    BEGIN CATCH
-        THROW;
-    END CATCH;
-END;
-
-
--- GET USER
-CREATE PROCEDURE GetUsers
-AS
-BEGIN
-    SELECT user_id, username FROM Users;
-END;
-
-
-
--- CREATE contact
-CREATE PROCEDURE CreateContact(
-    @p_user_id INT,
-    @p_full_name VARCHAR(100),
-    @p_gender VARCHAR(10),
-    @p_price_range VARCHAR(50),
-    @p_phone VARCHAR(10)
+-- GET NEWS DETAIL
+CREATE FUNCTION GetNewsDetail
+(
+    @p_news_id INT
 )
-AS
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM (VALUES ('Male'), ('Female'), ('Other')) AS GenderList(g) WHERE @p_gender = g)
-    BEGIN
-        RETURN -1;
-    END
-
-    INSERT INTO Contacts (user_id, full_name, gender, price_range, phone)
-    VALUES (@p_user_id, @p_full_name, @p_gender, @p_price_range, @p_phone);
-
-    RETURN 1;
-END;
-
---DROP PROCEDURE IF EXISTS CreateContact;
-
--- GET BY USER ID
-CREATE PROCEDURE GetContactsByUserId
-    @p_user_id INT
-AS
-BEGIN
-    SELECT contact_id, user_id, full_name, gender, price_range, phone
-    FROM Contacts
-    WHERE user_id = @p_user_id;
-END;
-
-
--- DELETE CONTACT
-CREATE PROCEDURE DeleteContact
-    @p_contact_id INT
-AS
-BEGIN
-    DELETE FROM Contacts WHERE contact_id = @p_contact_id;
-END;
-
-
-
--- UPDTE USER
-
-CREATE PROCEDURE UpdateUserInfo
-    @p_user_id INT,
-    @p_first_name VARCHAR(50),
-    @p_last_name VARCHAR(50),
-    @p_phone VARCHAR(50),
-    @p_password TEXT,
-    @p_avatar VARCHAR(255)
-AS
-BEGIN
-    -- Update user information
-    UPDATE Users
-    SET
-        first_name = @p_first_name,
-        last_name = @p_last_name,
-        phone = @p_phone,
-        [password] = CASE WHEN @p_password IS NOT NULL THEN @p_password ELSE [password] END,
-        avatar = @p_avatar
-    WHERE user_id = @p_user_id;
-END;
-
--- DROP PROCEDURE IF EXISTS UpdateUserInfo;
-
--- Procedure để lấy danh sách tin tức
-CREATE PROCEDURE GetNewsList
-AS
-BEGIN
-    SELECT news_id, title FROM News;
-END;
-
-
--- Procedure để lấy chi tiết tin tức bằng news_id
-
--- CREATE PROCEDURE GetNewsDetail
---     @p_news_id INT
--- AS
--- BEGIN
---     SELECT * FROM News WHERE news_id = @p_news_id;
--- END;
-
---DROP PROCEDURE IF EXISTS GetNewsDetail;
-
-CREATE FUNCTION GetNewsDetail(@p_news_id INT)
 RETURNS TABLE
 AS
 RETURN
 (
-    SELECT * FROM News WHERE news_id = @p_news_id
+    SELECT News.news_id,
+           News.title,
+           News.content,
+           News.cate_id,
+           News.createdAt,
+           NewsCategories.cate_name
+    FROM News
+    INNER JOIN NewsCategories ON News.cate_id = NewsCategories.cate_id
+    WHERE News.news_id = @p_news_id
 );
 
+-- GET LIST CAR FOR AMDIN
+CREATE VIEW CarsViewAdmin AS
+SELECT Cars.*, 
+       CarBrands.brand_name AS brand_name, 
+       Users.username AS creator_username,
+       Users.first_name AS creator_first_name, 
+       Users.last_name AS creator_last_name,
+       Users.phone AS creator_phone, 
+       Users.avatar AS creator_avatar, 
+       Categories.cate_name AS cate_name
+FROM Cars
+INNER JOIN CarBrands ON Cars.brand_id = CarBrands.brand_id
+INNER JOIN Users ON Cars.creator_id = Users.user_id
+LEFT JOIN Categories ON Cars.cate_id = Categories.cate_id;
 
--- GET RANDOM CAR
-CREATE PROCEDURE GetRandomCars
+-- UPDATE STATUS CAR
+CREATE PROCEDURE UpdateCarStatus
+    @p_car_id INT,
+    @p_status INT
 AS
 BEGIN
-    SELECT TOP 3
-        Cars.car_id,
-        Cars.car_name,
-        CarBrands.brand_name AS brand,
-        Cars.model,
-        Cars.image,
-        Cars.price,
-        Cars.year,
-        Users.username AS creator,
-        CONCAT(Users.first_name, ' ', Users.last_name) AS creator_detail
-    FROM 
-        Cars
-    INNER JOIN 
-        CarBrands ON Cars.brand_id = CarBrands.brand_id
-    LEFT JOIN 
-        Users ON Cars.creator_id = Users.user_id
-    ORDER BY NEWID(); -- Order randomly
-END;
-
---DROP PROCEDURE IF EXISTS GetRandomCars;
-
--- RANDOM NEWS
-CREATE PROCEDURE GetRandomNews
-AS
-BEGIN
-    SELECT TOP 6
-        news_id,
-        title,
-        content
-    FROM 
-        News
-    ORDER BY NEWID(); -- Order randomly
+    UPDATE Cars
+    SET status = @p_status
+    WHERE car_id = @p_car_id;
 END;
 
 

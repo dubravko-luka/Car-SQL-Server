@@ -13,7 +13,7 @@ const NewsDetailPage = () => {
         const fetchNewsDetail = async () => {
             try {
                 const response = await axios.get(`/news/${id}`);
-                setNews(response.data);
+                setNews(response.data[0]);
             } catch (error) {
                 console.error('Error fetching news detail:', error);
             }
@@ -24,7 +24,7 @@ const NewsDetailPage = () => {
 
 
     if (!news) {
-        return <div>Loading...</div>;
+        return <div className='w-full flex justify-center'>Loading...</div>;
     }
 
 
@@ -35,7 +35,7 @@ const NewsDetailPage = () => {
                     <Link to="/" className={styles.backButton}>Quay lại</Link>
                 </div>
                 <h2 className={styles.title}>{news.title}</h2>
-                <p style={{ fontSize: '14px', textAlign: 'right' }}>{moment().format('DD-MM-YYYY HH:MM:SS')}</p>
+                <p style={{ fontSize: '14px', textAlign: 'right' }}>{moment(news.createdAt).format('DD-MM-YYYY HH:MM:SS')}</p>
                 <hr />
                 <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
             </div>

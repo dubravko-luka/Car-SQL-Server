@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config()
 
 const app = express();
-const port = 3000;
+const port = 4444;
 
 const config = {
     user: 'sa',
@@ -402,257 +402,55 @@ app.get('/random-cars', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.get('/cars', async (req, res) => {
-//     try {
-//         const { car_name, brand_id, model, year } = req.query;
-    
-//         let query = 'SELECT * FROM CarList WHERE 1=1';
-//         const params = [];
-
-//         if (car_name) {
-//             query += ' AND car_name LIKE @car_name';
-//             params.push({ name: 'car_name', type: sql.NVarChar, value: '%' + car_name + '%' });
-//         }
-//         if (brand_id) {
-//             query += ' AND brand_id = @brand_id';
-//             params.push({ name: 'brand_id', type: sql.Int, value: brand_id });
-//         }
-//         if (model) {
-//             query += ' AND model LIKE @model';
-//             params.push({ name: 'model', type: sql.NVarChar, value: '%' + model + '%' });
-//         }
-//         if (year) {
-//             query += ' AND year = @year';
-//             params.push({ name: 'year', type: sql.Int, value: year });
-//         }
-
-//         query += ' ORDER BY car_id DESC';
-
-//         const pool = await sql.connect(config);
-//         const result = await pool.request()
-//             .input('car_name', sql.NVarChar, '%' + car_name + '%')
-//             .input('brand_id', sql.Int, brand_id)
-//             .input('model', sql.NVarChar, '%' + model + '%')
-//             .input('year', sql.Int, year)
-//             .query(query, params);
-
-//         res.status(200).send(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
-// app.get('/carBrands', async (req, res) => {
-//     try {
-//         const query = 'EXEC GetCarBrands';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request().query(query);
-
-//         res.status(200).send(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
-// app.delete('/cars/delete/:car_id', authenticateToken, async (req, res) => {
-//     try {
-//         const car_id = req.params.car_id;
-//         const query = 'EXEC DeleteCar @car_id';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request()
-//             .input('car_id', sql.Int, car_id)
-//             .query(query);
-
-//         return res.status(200).send('Xe đã được xoá thành công!');
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         return res.status(500).send('Internal Server Error');
-//     }
-// });
-
-// app.get('/users', async (req, res) => {
-//     try {
-//         const query = 'EXEC GetUsers';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request().query(query);
-
-//         res.status(200).json(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-// app.post('/contacts', async (req, res) => {
-//     try {
-//         const { garage_id, full_name, gender, price_range, phone } = req.body;
-
-//         const query = 'CreateContact';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request()
-//             .input('p_user_id', sql.Int, garage_id)
-//             .input('p_full_name', sql.NVarChar(100), full_name)
-//             .input('p_gender', sql.NVarChar(10), gender)
-//             .input('p_price_range', sql.NVarChar(50), price_range)
-//             .input('p_phone', sql.NVarChar(10), phone)
-//             .execute(query);
-
-//         // Kiểm tra kết quả trả về từ stored procedure
-//         if (result.returnValue === -1) {
-//             return res.status(400).json({ error: 'Invalid gender' });
-//         } else if (result.returnValue === 1) {
-//             return res.status(201).json({ message: 'Contact created successfully' });
-//         } else {
-//             return res.status(500).json({ error: 'Internal Server Error' });
-//         }
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         return res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-// app.get('/contacts', authenticateToken, async (req, res) => {
-//     try {
-//         const user_id = req.user.user_id;
-
-//         const query = 'EXEC GetContactsByUserId @userId';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request()
-//             .input('userId', sql.Int, user_id)
-//             .query(query);
-
-//         res.status(200).json(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-// app.delete('/contacts/:contactId', authenticateToken, async (req, res) => {
-//     try {
-//         const contactId = req.params.contactId;
-
-//         const query = 'EXEC DeleteContact @contactId';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request()
-//             .input('contactId', sql.Int, contactId)
-//             .query(query);
-
-//         return res.status(200).json({ message: 'Contact deleted successfully' });
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         return res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-// app.get('/news', async (req, res) => {
-//     try {
-//         const query = 'EXEC GetNewsList';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request().query(query);
-
-//         return res.status(200).json(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         return res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-// app.get('/random-news', async (req, res) => {
-//     try {
-//         const query = 'EXEC GetRandomNews';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request().query(query);
-
-//         return res.status(200).json(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         return res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
 app.get('/news/:newsId', async (req, res) => {
     try {
         const newsId = req.params.newsId;
-        const query = 'SELECT * FROM dbo.GetNewsDetail(@newsId)';
+        const query = `SELECT * FROM GetNewsDetail(${newsId})`;
         const pool = await sql.connect(config);
-        const result = await pool.request()
-            .input('newsId', sql.Int, newsId)
-            .query(query);
+        const result = await pool.request().query(query);
 
-        if (result.recordset.length === 0) {
-            return res.status(404).json({ error: 'News not found' });
-        }
-
-        return res.status(200).json(result.recordset[0]);
+        return res.status(200).json(result.recordset);
     } catch (error) {
         console.error('Error executing SQL query:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-// app.get('/random-cars', async (req, res) => {
-//     try {
-//         const query = 'EXEC GetRandomCars';
-//         const pool = await sql.connect(config);
-//         const result = await pool.request().query(query);
+app.get('/cars-admin', authenticateToken, async (req, res) => {
+    try {
+        const query = 'SELECT * FROM CarsViewAdmin';
+        const pool = await sql.connect(config);
+        const result = await pool.request().query(query);
 
-//         return res.status(200).json(result.recordset);
-//     } catch (error) {
-//         console.error('Error executing SQL query:', error);
-//         return res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+        return res.status(200).json(result.recordset);
+    } catch (error) {
+        console.error('Error executing SQL query:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
-// Chạy ứng dụng trên cổng 3000
+app.put('/cars-status', authenticateToken, async (req, res) => {
+    try {
+        const { car_id, status } = req.body;
+
+        if (!car_id || !status) {
+            return res.status(400).json({ error: 'car_id and status are required fields' });
+        }
+        const query = 'EXEC UpdateCarStatus @p_car_id, @p_status';
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .input('p_car_id', sql.Int, car_id)
+            .input('p_status', sql.Int, status)
+            .query(query);
+
+        return res.status(200).json({ message: 'Car status updated successfully' });
+    } catch (error) {
+        console.error('Error updating car status:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

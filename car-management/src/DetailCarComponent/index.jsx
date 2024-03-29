@@ -1,23 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, Link } from 'react-router-dom'
 import styles from './styles.module.css'
 
-function CarDetailComponent() {
+function CarDetailComponent({ idCar, showBack = true }) {
     const [carDetail, setCarDetail] = useState(null);
     const location = useLocation();
     const params = useParams()
+    const refDescription = useRef(null);
+    const [showDescription, setShowDescription] = useState(false);
+    const [showButtonDescription, setShowButtonDescription] = useState(true);
 
     useEffect(() => {
-        axios.get(`/cars/detail/${params.id}`)
+        axios.get(`/cars/detail/${idCar ?? params.id}`)
             .then(response => {
-                console.log('-----TSX---->', response.data);
                 setCarDetail(response.data);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-    }, [params.id]);
+    }, [params.id, idCar]);
+
+    useEffect(() => {
+        function updateSize() {
+			const _height = Number(refDescription?.current?.offsetHeight);
+
+			setShowButtonDescription(_height >= 250)
+			setShowDescription(_height < 250)
+		}
+
+		if (refDescription) {
+			window.addEventListener('resize', updateSize);
+			updateSize();
+			return () => window.removeEventListener('resize', updateSize);
+		}
+    }, [refDescription, carDetail]);
 
     if (!carDetail) {
         return <div>Loading...</div>;
@@ -29,12 +46,11 @@ function CarDetailComponent() {
         return formattedValue;
     };
 
-
     return (
         <div className={`${styles.wrapper}`}>
             <div className={`${styles.container}`}>
-                <Link to={location?.state?.from ?? '/'} className={styles.backButton}>Quay lại</Link>
-                <div className={styles.detailNameCar}>
+                {showBack && <Link to={location?.state?.from ?? '/'} className={styles.backButton}>Quay lại</Link>}
+                <div className={styles.detailNameCar} style={{ borderTop: `1px solid ${showBack ? '#000' : 'transparent'}`}}>
                     <h2 className={styles.title}>{carDetail.car_name}</h2>
                 </div>
                 <div className={styles.detailPage}>
@@ -110,8 +126,8 @@ function CarDetailComponent() {
                                     <div className={styles.tdInfoDiv}>
                                         <table border={0} className={styles.table2}>
                                             <tbody>
-                                            <tr className='flex justify-between w-full'>
-                                                    <td colSpan={2}>
+                                                <tr className='flex justify-between w-full'>
+                                                    <td colSpan={2} style={{ paddingBottom: 0 }}>
                                                         <span style={{ fontWeight: 'bold' }}>Người bán</span>
                                                     </td>
                                                 </tr>
@@ -134,23 +150,40 @@ function CarDetailComponent() {
                             </tr>
                         </tbody>
                     </table>
-                    <table>
+                    <table style={{ marginTop: '20px' }}>
                         <tr>
                             <td>
-                                <table border={1} className={styles.table2}>
+                                <table border={0} className={styles.table2}>
                                     <tbody>
                                         <tr>
-                                            <td style={{ textAlign: 'center' }} colSpan={2}>Mô tả</td>
+                                            <td style={{ textAlign: 'left', fontWeight: 'bold', fontSize: '18px' }} colSpan={2}>Mô tả</td>
                                         </tr>
                                         <tr>
                                             <td colSpan={2}>
-                                                <div
+                                                {/* <div
                                                     dangerouslySetInnerHTML={{
                                                         __html: carDetail.car_description ?
                                                             JSON.parse(carDetail.car_description)?.replace(/\n/g, '<br />') :
                                                             `<p style="text-align: center">Không có mô tả</p>`
                                                     }}
+                                                ></div> */}
+                                                <div
+                                                    ref={refDescription}
+                                                    style={{ whiteSpace: 'pre-line' }}
+                                                    className={`${styles.description} ${showDescription ? styles.active : ''}`}
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: carDetail.car_description
+                                                        ? JSON.parse(carDetail.car_description)?.replace(/\n/g, '<br />')
+                                                        : `<p style="text-align: center">Không có mô tả</p>`
+                                                    }}
                                                 ></div>
+                                                {showButtonDescription ? (
+                                                    <div onClick={() => setShowDescription(!showDescription)} className={`${styles.readmore} text-13 font-normal`}>
+                                                        {showDescription ? 'Thu gọn' : 'Xem thêm'}
+                                                    </div>
+                                                ) : (
+                                                    <></>
+                                                )}
                                             </td>
                                         </tr>
                                     </tbody>

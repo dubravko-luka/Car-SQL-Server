@@ -118,3 +118,10 @@ code {
     transform: rotate(360deg);
   }
 }
+
+*::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+  display: none;
+  background-color: transparent;
+}

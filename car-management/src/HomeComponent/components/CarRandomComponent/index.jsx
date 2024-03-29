@@ -34,6 +34,7 @@ const RandomCarsComponent = () => {
             <div className={`${styles.list}`}>
                 {randomCars.map((car, index) => (
                     <Link
+                        key={index}
                         className={styles.link}
                         to={{
                             pathname: `/car/detail/${car.car_id}`,

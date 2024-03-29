@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 import MyCar from './components/MyCar'
+import CarAdmin from './components/CarAdmin'
 import MyContact from './components/MyContact'
 
 function MyAccountComponent() {
@@ -81,22 +82,38 @@ function MyAccountComponent() {
         >
           Danh sách xe
         </div>
-        <div
-          className={`${styles.tab} ${tab === 1 ? styles.active : ''}`}
-          onClick={() => {
-            setTab(1)
-          }}
-        >
-          Danh sách liên hệ
-        </div>
+        {
+          userData?.role_id !== 1 && (
+            <div
+              className={`${styles.tab} ${tab === 1 ? styles.active : ''}`}
+              onClick={() => {
+                setTab(1)
+              }}
+            >
+              Danh sách liên hệ
+            </div>
+          )
+        }
       </div>
 
       {
-        tab === 0 && <MyCar />
+        userData?.role_id === 1 && (
+          <CarAdmin />
+        )
       }
 
       {
-        tab === 1 && <MyContact />
+        userData?.role_id !== 1 && (
+          <>
+            {
+              tab === 0 && <MyCar />
+            }
+
+            {
+              tab === 1 && <MyContact />
+            }
+          </>
+        )
       }
     </div>
   );

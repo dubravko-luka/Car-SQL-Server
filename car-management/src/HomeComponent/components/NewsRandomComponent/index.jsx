@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import styles from './styles.module.css'
 import { Link } from 'react-router-dom'
+import styles from './styles.module.css'
+import moment from 'moment';
 
 const RandomNewsComponent = () => {
     const [randomNews, setRandomNews] = useState([]);
@@ -38,13 +39,18 @@ const RandomNewsComponent = () => {
             <h2 className={styles.title}>Tin tức hôm nay</h2>
             <div className={`${styles.list}`}>
                 {randomNews.map((news, index) => (
-                    <div key={index} className={styles.carItem}>
+                    <Link key={index} to={`/news/detail/${news.news_id}`} className={styles.carItem}>
                         <div className={`${styles.contentItemCar}`}>
                             <table border={0} className={styles.table}>
                                 <tbody>
                                     <tr>
                                         <td className={`${styles.titleTable}`}>
                                             <span style={{ fontWeight: 'bold' }}>{news.title}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className={`${styles.titleTableTime}`}>
+                                            <span style={{ fontSize: '12px' }}>{moment(news.createdAt).format('DD/MM/YYYY HH:mm:ssqu')}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -58,7 +64,7 @@ const RandomNewsComponent = () => {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
             {

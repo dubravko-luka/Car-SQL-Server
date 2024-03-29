@@ -92,7 +92,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  border-top: 1px solid #000;
 }
 
 .createButton,
@@ -144,4 +143,46 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.description {
+  max-height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.description:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #fff 10%, #00000000);
+}
+
+.description.active {
+  max-height: unset !important;
+  height: auto;
+  background: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+.description.active:before {
+  content: unset;
+}
+
+.readmore {
+  margin: auto;
+  margin-top: 10px;
+  width: 134.155px;
+  height: 35px;
+  border-radius: 5px;
+  border: 0.5px solid #0277BB;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

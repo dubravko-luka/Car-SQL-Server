@@ -30,9 +30,10 @@
     box-sizing: border-box;
     text-decoration: none;
     border-radius: 0px;
-    border: 1px solid #000;
-    background-color: #efefef;
-    color: #000;
+    border: 0px;
+    border-radius: 20px;
+    background: var(--linear);
+    color: #fff;
 }
 
 .createButton:hover,

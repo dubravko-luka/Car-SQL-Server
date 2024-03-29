@@ -137,6 +137,7 @@ function ShowListComponent() {
         <div className={`${styles.list}`}>
           {carList.map((car, index) => (
             <Link
+              key={index}
               className={styles.link}
               to={{
                 pathname: `/car/detail/${car.car_id}`,

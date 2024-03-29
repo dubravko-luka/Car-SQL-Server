@@ -51,46 +51,53 @@ function MyAccountComponent() {
       <div className={styles.buttonGroupCreate}>
         <Link to="/create" className={styles.createButton}>Thêm mới</Link>
       </div>
-      <table border={1} className={styles.carTable}>
-        <thead>
-          <tr>
-            <th>Tên xe</th>
-            <th>Danh mục</th>
-            <th>Thương hiệu</th>
-            <th>Mẫu xe</th>
-            <th>Năm sản xuất</th>
-            <th>Giá xe</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          {carList.map(car => (
-            <tr key={car.id} className={styles.carItem}>
-              <td>{car.car_name}</td>
-              <td>{car.cate_name}</td>
-              <td>{car.brand_name}</td>
-              <td>{car.model}</td>
-              <td>{car.year}</td>
-              <td>{formatCurrency(car.price)}</td>
-              <td>
-                <div className={styles.buttonGroup}>
-                  <Link to={`/edit/${car.car_id}`} className={styles.editButton}>Sửa</Link>
-                  <button onClick={() => handleDeleteCar(car.car_id)} className={styles.deleteButton}>Xoá</button>
-                </div>
-              </td>
+      <div className={`${styles.tableResponsive}`}>
+        <table border={1} className={styles.carTable}>
+          <thead>
+            <tr>
+              <th>Tên xe</th>
+              <th>Danh mục</th>
+              <th>Thương hiệu</th>
+              <th>Mẫu xe</th>
+              <th>Năm sản xuất</th>
+              <th>Giá xe</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
             </tr>
-          ))}
-          {
-            carList.length === 0 && (
-              <tr className={`${styles.carItem} ${styles.noData}`}>
-                <td colSpan={7} style={{ textAlign: 'center' }}>
-                  Không có dữ liệu
+          </thead>
+          <tbody>
+            {carList.map(car => (
+              <tr
+                key={car.id}
+                className={`${styles.carItem} ${car.status === 0 ? styles.pending : car.status === 1 ? styles.actived : styles.reject}`}
+              >
+                <td>{car.car_name}</td>
+                <td>{car.cate_name}</td>
+                <td>{car.brand_name}</td>
+                <td>{car.model}</td>
+                <td>{car.year}</td>
+                <td>{formatCurrency(car.price)}</td>
+                <td>{car.status === 0 ? 'Chờ duyệt' : car.status === 1 ? 'Đang hoạt động' : 'Từ chối hiển thị'}</td>
+                <td>
+                  <div className={styles.buttonGroup}>
+                    <Link to={`/edit/${car.car_id}`} className={styles.editButton}>Sửa</Link>
+                    <button onClick={() => handleDeleteCar(car.car_id)} className={styles.deleteButton}>Xoá</button>
+                  </div>
                 </td>
               </tr>
-            )
-          }
-        </tbody>
-      </table>
+            ))}
+            {
+              carList.length === 0 && (
+                <tr className={`${styles.carItem} ${styles.noData}`}>
+                  <td colSpan={7} style={{ textAlign: 'center' }}>
+                    Không có dữ liệu
+                  </td>
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
