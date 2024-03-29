@@ -19,6 +19,7 @@
 .contentItemCar {
     /* padding: 10px 5px; */
     box-sizing: border-box;
+    height: 100%;
 }
 
 .table {
