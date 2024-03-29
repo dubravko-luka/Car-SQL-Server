@@ -20,10 +20,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  useEffect(() => {
-    axios.defaults.baseURL = 'http://103.57.223.208:4444'
-  }, [])
-
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', background: 'rgb(242 242 242)' }}>
