@@ -1,4 +1,4 @@
--- Active: 1711698841394@@127.0.0.1@1433@garage
+-- Active: 1711737624087@@103.57.223.208@1433@garage
 
 
 CREATE TABLE Roles (
@@ -77,7 +77,7 @@ INSERT INTO Roles (role_name, role_slug) VALUES
 ('Admin', 'admin'),
 ('User', 'user');
 
-INSERT INTO CarBrands (brand_name) VALUES ('Toyota'), ('Honda'), ('Ford');
+INSERT INTO CarBrands (brand_name) VALUES ('Toyota'), ('Honda'), ('Ford'), ('Mazda'), ('Kia'), ('Hyundai');
 
 INSERT INTO Categories (cate_name, cate_slug) VALUES 
 ('Sedan', 'sedan'), 
@@ -90,7 +90,7 @@ INSERT INTO NewsCategories (cate_name, cate_slug) VALUES
 ('Entertainment', 'entertainment');
 
 INSERT INTO Users (username, first_name, last_name, phone, password, role_id) VALUES 
-('admin', 'Admin', 'User', '123456789', '$2b$10$/oRSgr/UKaNKs35ry1xj8eCC1JPH6AaUIed6xl4b0auAzHVRsO3CG', 1) -- Pass: 1234
+('admin', 'Admin', 'User', '123456789', '$2b$10$/oRSgr/UKaNKs35ry1xj8eCC1JPH6AaUIed6xl4b0auAzHVRsO3CG', 1), -- Pass: 1234
 ('user1', 'John', 'Doe', '987654321', '$2b$10$/oRSgr/UKaNKs35ry1xj8eCC1JPH6AaUIed6xl4b0auAzHVRsO3CG', 2), -- Pass: 1234
 ('user2', 'Jane', 'Smith', '555555555', '$2b$10$/oRSgr/UKaNKs35ry1xj8eCC1JPH6AaUIed6xl4b0auAzHVRsO3CG', 2); -- Pass: 1234
 
