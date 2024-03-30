@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom'
 import styles from './styles.module.css'
+import NewsRandomComponent from './components/NewsRandomComponent'
 import moment from 'moment'
 import axios from 'axios';
 
@@ -34,10 +35,15 @@ const NewsDetailPage = () => {
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Link to="/" className={styles.backButton}>Quay lại</Link>
                 </div>
-                <h2 className={styles.title}>{news.title}</h2>
-                <p style={{ fontSize: '14px', textAlign: 'right' }}>{moment(news.createdAt).format('DD-MM-YYYY HH:MM:SS')}</p>
-                <hr />
-                <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
+                <div className='flex justify-center' style={{ gap: '20px' }}>
+                    <div style={{ maxWidth: '100%', width: '100%', boxShadow: '5px 5px 5px 0px rgba(0, 0, 0, .2)', padding: '0px 10px', boxSizing: 'border-box', borderRadius: '5px', overflow: 'hidden' }}>
+                        <h2 className={styles.title}>{news.title}</h2>
+                        <p style={{ fontSize: '14px', textAlign: 'right' }}>{moment(news.createdAt).format('DD-MM-YYYY HH:MM:SS')}</p>
+                        <hr />
+                        <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
+                    </div>
+                    <NewsRandomComponent cate_id={news.cate_id} />
+                </div>
             </div>
         </div>
     );

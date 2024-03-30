@@ -11,7 +11,7 @@ const port = 4444;
 const config = {
     user: 'sa',
     password: 'Password.1',
-    server: '127.0.0.1',
+    server: '103.57.223.208',
     port: 1433,
     database: 'garage',
     options: {
@@ -147,7 +147,6 @@ app.put('/updateUserInfo', authenticateToken, async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 app.get('/mycars', authenticateToken, async (req, res) => {
     try {
@@ -376,6 +375,24 @@ app.get('/cars', async (req, res) => {
     }
 });
 
+app.get('/cars-some', async (req, res) => {
+    try {
+        const { brand_id, cate_id } = req.query;
+
+        const query = 'SELECT * FROM GetSixCarsInfoByBrandOrCategory(@brand_id, @cate_id)';
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .input('brand_id', sql.Int, brand_id || null)
+            .input('cate_id', sql.Int, cate_id || null)
+            .query(query);
+
+        res.status(200).json(result.recordset);
+    } catch (error) {
+        console.error('Error executing SQL query:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.get('/random-news', async (req, res) => {
     try {
         const query = 'EXEC GetRandomNews';
@@ -386,6 +403,23 @@ app.get('/random-news', async (req, res) => {
     } catch (error) {
         console.error('Error executing SQL query:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/news-some', async (req, res) => {
+    try {
+        const { cate_id } = req.query;
+
+        const query = 'SELECT * FROM GetFourNewsByCategoryId(@cate_id)';
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .input('cate_id', sql.Int, cate_id || null)
+            .query(query);
+
+        res.status(200).json(result.recordset);
+    } catch (error) {
+        console.error('Error executing SQL query:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 

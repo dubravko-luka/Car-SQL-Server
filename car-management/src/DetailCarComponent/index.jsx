@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, Link } from 'react-router-dom'
+import CarRandomComponent from './components/CarRandomComponent'
 import styles from './styles.module.css'
 
 function CarDetailComponent({ idCar, showBack = true }) {
@@ -194,6 +195,9 @@ function CarDetailComponent({ idCar, showBack = true }) {
                                         </tbody>
                                     </table>
                                 </td>
+                            </tr>
+                            <tr>
+                                <CarRandomComponent brand_id={carDetail.brand_id} cate_id={carDetail.cate_id} />
                             </tr>
                         </table>
                     </div>

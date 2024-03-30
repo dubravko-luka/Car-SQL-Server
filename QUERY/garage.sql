@@ -1,4 +1,4 @@
--- Active: 1711737624087@@103.57.223.208@1433@garage
+-- Active: 1711776426076@@103.57.223.208@1433@garage
 
 
 CREATE TABLE Roles (
@@ -565,6 +565,58 @@ BEGIN
     SET status = @p_status
     WHERE car_id = @p_car_id;
 END;
+
+-- GET 6 CAR WITH BRAND_ID
+CREATE FUNCTION GetSixCarsInfoByBrandOrCategory
+(
+    @p_brand_id INT = NULL,
+    @p_cate_id INT = NULL
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT TOP 6 
+        Cars.*, 
+        CarBrands.brand_name AS brand_name, 
+        Users.username AS creator_username,
+        Users.first_name AS creator_first_name, 
+        Users.last_name AS creator_last_name,
+        Users.phone AS creator_phone, 
+        Users.avatar AS creator_avatar, 
+        Categories.cate_name AS cate_name
+    FROM 
+        Cars
+    INNER JOIN 
+        CarBrands ON Cars.brand_id = CarBrands.brand_id
+    INNER JOIN 
+        Users ON Cars.creator_id = Users.user_id
+    INNER JOIN 
+        Categories ON Cars.cate_id = Categories.cate_id
+    WHERE 
+        (Cars.brand_id = @p_brand_id OR @p_brand_id IS NULL)
+        OR (Cars.cate_id = @p_cate_id OR @p_cate_id IS NULL)
+);
+
+-- GET 4 NEW WITH CATE_ID
+CREATE FUNCTION GetFourNewsByCategoryId
+(
+    @p_cate_id INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT TOP 4 
+        News.*, 
+        NewsCategories.cate_name AS cate_name
+    FROM 
+        News
+    INNER JOIN 
+        NewsCategories ON News.cate_id = NewsCategories.cate_id
+    WHERE 
+        News.cate_id = @p_cate_id
+);
 
 
 
