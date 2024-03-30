@@ -95,9 +95,9 @@ INSERT INTO Users (username, first_name, last_name, phone, password, role_id) VA
 ('user2', 'Jane', 'Smith', '555555555', '$2b$10$/oRSgr/UKaNKs35ry1xj8eCC1JPH6AaUIed6xl4b0auAzHVRsO3CG', 2); -- Pass: 1234
 
 INSERT INTO Cars (car_name, brand_id, price, image, model, year, creator_id, car_description, status, cate_id) VALUES 
-('Camry', 1, '25000', 'https://hondaotovinhphuc-vinhyen.vn/wp-content/uploads/2023/03/honda-civic-type-r-3649-3.jpg', '2023', 2023, 2, 'A comfortable and reliable sedan.', 1, 1),
-('CR-V', 2, '28000', 'https://hondaotovinhphuc-vinhyen.vn/wp-content/uploads/2023/03/honda-civic-type-r-3649-3.jpg', '2023', 2023, 2, 'A versatile and spacious SUV.', 1, 2),
-('F-150', 3, '35000', 'https://hondaotovinhphuc-vinhyen.vn/wp-content/uploads/2023/03/honda-civic-type-r-3649-3.jpg', '2023', 2023, 2, 'A powerful and durable truck.', 1, 3);
+('Camry The he 4', 1, '25000', 'https://hondaotovinhphuc-vinhyen.vn/wp-content/uploads/2023/03/honda-civic-type-r-3649-3.jpg', '2023', 2023, 2, 'A comfortable and reliable sedan.', 0, 1),
+('CR-V The he 4', 2, '28000', 'https://hondaotovinhphuc-vinhyen.vn/wp-content/uploads/2023/03/honda-civic-type-r-3649-3.jpg', '2023', 2023, 2, 'A versatile and spacious SUV.', 1, 2),
+('F-150 The he 4', 3, '35000', 'https://hondaotovinhphuc-vinhyen.vn/wp-content/uploads/2023/03/honda-civic-type-r-3649-3.jpg', '2023', 2023, 2, 'A powerful and durable truck.', 2, 3);
 
 INSERT INTO Contacts (user_id, full_name, gender, price_range, phone) VALUES 
 (2, 'Alice Johnson', 'Female', '20000-30000', '123123123'),
@@ -202,6 +202,14 @@ BEGIN
     IF EXISTS (SELECT 1 FROM inserted WHERE phone IN (SELECT phone FROM Users GROUP BY phone HAVING COUNT(*) > 1))
     BEGIN
         RAISERROR ('Phone number must be unique.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END;
+
+    -- Check valid phone number format (Vietnamese phone number)
+    IF EXISTS (SELECT 1 FROM inserted WHERE phone NOT LIKE '[0-9]%' OR LEN(phone) <> 10)
+    BEGIN
+        RAISERROR ('Phone number must be a valid Vietnamese phone number.', 16, 1);
         ROLLBACK TRANSACTION;
         RETURN;
     END;
