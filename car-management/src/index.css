@@ -119,9 +119,27 @@ code {
   }
 }
 
-*::-webkit-scrollbar {
-  height: 0;
-  width: 0;
+/* *::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
   display: none;
-  background-color: transparent;
+  background-color: red;
+} */
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  background-color: #1b1c4bff;
+}
+
+*::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px;
+  background-color: #1b1c4bff;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: rgb(244, 167, 0);
 }

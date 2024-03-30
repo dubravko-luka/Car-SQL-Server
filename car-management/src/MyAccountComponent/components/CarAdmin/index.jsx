@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from './styles.module.css';
 import { toastPending, toastUpdateError, toastUpdateSuccess } from '../../../helpers/toast';
 import { useHistory } from 'react-router-dom';
-import CarDetailComponent from '../../../DetailCarComponent';
+import CarDetailComponent from '../DetailCarComponent';
 
 function MyAccountComponent() {
   const [carList, setCarList] = useState([]);
@@ -135,7 +135,7 @@ function MyAccountComponent() {
                 </svg>
               </div>
               <div className={`${styles.modalContent}`}>
-                <CarDetailComponent idCar={idViewCar} showBack={false} />
+                <CarDetailComponent idCar={idViewCar} />
               </div>
             </div>
           </div>

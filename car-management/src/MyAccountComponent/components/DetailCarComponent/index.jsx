@@ -1,19 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { useParams, useLocation, Link } from 'react-router-dom'
-import CarRandomComponent from './components/CarRandomComponent'
 import styles from './styles.module.css'
 
-function CarDetailComponent() {
+function CarDetailComponent({ idCar }) {
     const [carDetail, setCarDetail] = useState(null);
-    const location = useLocation();
-    const params = useParams()
     const refDescription = useRef(null);
     const [showDescription, setShowDescription] = useState(false);
     const [showButtonDescription, setShowButtonDescription] = useState(true);
 
     const getData = async () => {
-        const result = await axios.get(`/cars/detail/${params.id}`)
+        const result = await axios.get(`/cars/detail/${idCar}`)
         if (result) {
             setCarDetail(result.data);
         }
@@ -22,7 +18,7 @@ function CarDetailComponent() {
     useEffect(() => {
         getData()
         // eslint-disable-next-line
-    }, [params.id]);
+    }, [idCar]);
 
     useEffect(() => {
         function updateSize() {
@@ -61,8 +57,7 @@ function CarDetailComponent() {
         <>
             <div className={`${styles.wrapper}`}>
                 <div className={`${styles.container}`}>
-                    <Link to={location?.state?.from ?? '/'} className={styles.backButton}>Quay lại</Link>
-                    <div className={styles.detailNameCar} style={{ borderTop: `1px solid #000'}` }}>
+                    <div className={styles.detailNameCar} style={{ borderTop: `1px solid transparent` }}>
                         <h2 className={styles.title}>{carDetail.car_name}</h2>
                     </div>
                     <div className={styles.detailPage}>
@@ -194,9 +189,6 @@ function CarDetailComponent() {
                                         </tbody>
                                     </table>
                                 </td>
-                            </tr>
-                            <tr>
-                                <CarRandomComponent brand_id={carDetail.brand_id} cate_id={carDetail.cate_id} />
                             </tr>
                         </table>
                     </div>
