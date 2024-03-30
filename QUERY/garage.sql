@@ -596,7 +596,9 @@ RETURN
     WHERE 
         (Cars.brand_id = @p_brand_id OR @p_brand_id IS NULL)
         OR (Cars.cate_id = @p_cate_id OR @p_cate_id IS NULL)
+        AND Cars.status != 0 AND Cars.status != 2
 );
+
 
 -- GET 4 NEW WITH CATE_ID
 CREATE FUNCTION GetFourNewsByCategoryId
