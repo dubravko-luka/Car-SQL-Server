@@ -89,7 +89,7 @@ function MyAccountComponent() {
             {
               carList.length === 0 && (
                 <tr className={`${styles.carItem} ${styles.noData}`}>
-                  <td colSpan={7} style={{ textAlign: 'center' }}>
+                  <td colSpan={8} style={{ textAlign: 'center' }}>
                     Không có dữ liệu
                   </td>
                 </tr>
