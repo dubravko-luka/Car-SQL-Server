@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 import MyCar from './components/MyCar'
 import CarAdmin from './components/CarAdmin'
 import MyContact from './components/MyContact'
+import { formatNumber } from 'utils';
 
 function MyAccountComponent() {
   const [userData, setUserData] = useState(null);
@@ -47,7 +48,7 @@ function MyAccountComponent() {
                 </p>
                 <p className={styles.userInfo}>
                   <p className={styles.label}>Số điện thoại</p>
-                  <p className={styles.value}>(+84) {Number(userData.phone).toLocaleString('it-IT') ?? '-'}</p>
+                  <p className={styles.value}>(+84) {formatNumber(userData.phone) ?? '-'}</p>
                 </p>
               </div>
             </div>

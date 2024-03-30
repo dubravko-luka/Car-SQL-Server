@@ -21,6 +21,7 @@ function CarDetailComponent({ idCar, showBack = true }) {
 
     useEffect(() => {
         getData()
+        // eslint-disable-next-line
     }, [params.id, idCar]);
 
     useEffect(() => {
