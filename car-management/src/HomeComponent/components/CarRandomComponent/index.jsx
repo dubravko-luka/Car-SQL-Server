@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import styles from './styles.module.css'
 
-const RandomCarsComponent = () => {
+const RandomCarsComponent = ({ title }) => {
     const [randomCars, setRandomCars] = useState([]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const RandomCarsComponent = () => {
     return (
         <>
             <div className="flex justify-between items-center">
-                <h2 className={styles.title}>Xe mới đăng</h2>
+                <h2 className={styles.title}>{title}</h2>
                 <Link className={styles.viewAll} to="/car">Xem tất cả →</Link>
             </div>
             <div className={`${styles.list}`}>

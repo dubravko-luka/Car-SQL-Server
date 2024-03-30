@@ -7,16 +7,16 @@ const HomeComponent = () => {
     return (
         <>
             <div className={`${styles.wrapper}`}>
-                <RandomCarsComponent />
+                <RandomCarsComponent title="Xe mới đăng" />
                 <br />
                 <hr />
-                <NewsRandomComponent />
+                <NewsRandomComponent title="Tin mới" />
                 <br />
                 <hr />
-                <RandomCarsComponent />
+                <RandomCarsComponent title="Xe HOT" />
                 <br />
                 <hr />
-                <NewsRandomComponent />
+                <NewsRandomComponent title="Tin tức gần đây" />
             </div>
         </>
     )

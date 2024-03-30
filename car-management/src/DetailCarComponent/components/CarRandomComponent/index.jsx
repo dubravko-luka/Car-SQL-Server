@@ -30,7 +30,7 @@ const RandomCarsComponent = ({ brand_id, cate_id }) => {
         <>
             <div style={{ borderTop: '1px solid rgba(0, 0, 0, .2)', marginTop: '20px' }}></div>
             <div className="flex justify-between items-center">
-                <h2 className={styles.title}>Xe liên quan</h2>
+                <h2 className={styles.title}>Xe tương tự</h2>
                 <Link className={styles.viewAll} to="/car">Xem tất cả →</Link>
             </div>
             <div className={`${styles.list}`}>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './styles.module.css'
 import moment from 'moment';
 
-const RandomNewsComponent = () => {
+const RandomNewsComponent = ({ title }) => {
     const [randomNews, setRandomNews] = useState([]);
     const [showFullContent, setShowFullContent] = useState(false);
     const contentRef = useRef(null);
@@ -36,7 +36,7 @@ const RandomNewsComponent = () => {
 
     return (
         <>
-            <h2 className={styles.title}>Tin tức hôm nay</h2>
+            <h2 className={styles.title}>{title}</h2>
             <div className={`${styles.list}`}>
                 {randomNews.map((news, index) => (
                     <Link key={index} to={`/news/detail/${news.news_id}`} className={styles.carItem}>
