@@ -38,7 +38,7 @@ const RandomCarsComponent = ({ title }) => {
                         className={styles.link}
                         to={{
                             pathname: `/car/detail/${car.car_id}`,
-                            state: { from: '/car' }
+                            state: { from: '/' }
                         }}
                     >
                         <div key={index} className={styles.carItem}>
