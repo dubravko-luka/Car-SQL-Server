@@ -198,7 +198,7 @@ Những phương pháp nghiên cứu này sẽ giúp đảm bảo rằng dự á
 
 ## Install
 
-### MySQL Docker
+### MySQL Docker (Mac M1)
 #### Bước 1:
 ```
 docker pull mcr.microsoft.com/azure-sql-edge
