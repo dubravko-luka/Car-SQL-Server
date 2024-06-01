@@ -196,7 +196,7 @@ Những phương pháp nghiên cứu này sẽ giúp đảm bảo rằng dự á
 
 ---
 
-## Install
+## Cách Triển Khai Ứng Dụng
 
 ### MySQL Docker (Mac M1)
 #### Bước 1:
@@ -267,3 +267,46 @@ yarn or npm i
 ```
 yarn dev or npm run dev
 ```
+
+---
+
+## Đội Ngũ Phát Triển
+
+- **Người Sáng Lập:** [Dubravko Luka](https://github.com/dubravko-luka)
+- **Lập Trình Viên:** [Dubravko Luka](https://github.com/dubravko-luka)
+- **Thiết Kế Giao Diện:** [Dubravko Luka](https://github.com/dubravko-luka)
+- **Team:** Phương -  Chiêu - Phú
+
+--- 
+
+## Kết Luận và Cảm Ơn
+
+Trong quá trình phát triển dự án Todo List, chúng tôi đã học được rất nhiều và có những trải nghiệm đáng giá. Dự án này không chỉ là một bước tiến quan trọng trong việc nâng cao kỹ năng lập trình và phát triển ứng dụng web của chúng tôi, mà còn là một cơ hội để chúng tôi áp dụng các kiến thức đã học vào thực tế.
+
+Chúng tôi muốn bày tỏ lòng biết ơn sâu sắc đến những người đã hỗ trợ và động viên chúng tôi trong suốt quá trình phát triển dự án này. Đặc biệt, chúng tôi muốn gửi lời cảm ơn đặc biệt đến các thành viên trong nhóm, người thầy hướng dẫn, bạn bè và gia đình.
+
+Xin chân thành cảm ơn!
+
+---
+
+## Liên Hệ
+
+Nếu bạn có bất kỳ câu hỏi, đề xuất hoặc gặp vấn đề về ứng dụng, vui lòng liên hệ với chúng tôi qua thông tin sau:
+
+- Email: [dev.richard.npm98@gmail.com](mailto:dev.richard.npm98@gmail.com)
+- Điện thoại: +84 3xx xxx xxx
+- Địa chỉ: Số 000, Thành phố XYZ, Quốc gia ABC
+
+Chúng tôi luôn sẵn lòng lắng nghe và hỗ trợ bạn.
+
+## Bản Quyền
+
+Ứng dụng Todo List được phát triển và bảo vệ bởi luật bản quyền. Mọi quyền được bảo lưu.
+
+Đây là ứng dụng mã nguồn mở và miễn phí để sử dụng. Bạn có thể sử dụng, sao chép, sửa đổi và phân phối lại ứng dụng theo các điều khoản của giấy phép mở.
+
+Để biết thêm thông tin về các điều khoản và điều kiện, vui lòng xem tệp LICENSE trong mã nguồn của ứng dụng.
+
+## Phiên Bản
+
+Phiên bản hiện tại: 1.0.0
