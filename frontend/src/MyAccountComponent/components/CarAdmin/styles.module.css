@@ -1,0 +1,268 @@
+/* styles.module.css */
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tableResponsive {
+  width: 100%;
+  overflow: auto;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, .7);
+  border-radius: 5px;
+  border-color: #c8c8c8;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.wrapMyInfo {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.userData {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  width: calc(40% - 5px);
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.userDataInfo {
+  width: calc(60% - 5px);
+}
+
+.userInfo {
+  font-size: 18px;
+  color: #555;
+  margin: 0px 0px 25px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #000;
+  margin: 0;
+}
+
+.value {
+  text-align: right;
+  margin: 0;
+  font-weight: bold;
+  color: rgb(0 70 132);
+}
+
+.avatar {
+  width: 100%;
+  height: 200px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.avatar img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carListTitle {
+  font-size: 20px;
+  color: #333;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buttonGroupCreate {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.editButton, .createButton, .deleteButton, .viewButton, .buttonEmpty {
+  height: 40px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-radius: 20px;
+  background: var(--linear);
+  color: #fff;
+  border: 0px;
+  cursor: pointer;
+}
+
+.editButton,
+.deleteButton,
+.viewButton {
+  height: 30px;
+  border-radius: 5px;
+}
+
+.editButton {
+  background: rgb(0, 155, 46);
+}
+
+.deleteButton {
+  background: rgb(255, 0, 0);
+}
+
+.buttonEmpty {
+  background: transparent;
+}
+
+.viewButton {
+  background: #0078a7;
+}
+
+.createButton {
+  width: 120px;
+}
+
+.updateInfoButton {
+  height: 40px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-radius: 20px;
+  background: var(--linear);
+  color: #fff;
+}
+
+.deleteButton:hover {
+  background-color: rgb(194, 0, 0);
+  color: #fff;
+}
+
+.carTable {
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  border-color: #c8c8c8;
+}
+
+.carTable thead {
+  background: #bababa;
+}
+
+.carTable thead tr th {
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  width: 20%;
+  color: #000;
+  white-space: nowrap;
+}
+
+.carTable thead tr th:nth-child(5) {
+  text-align: center;
+}
+
+.carTable tbody tr td {
+  padding: 10px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.noData {
+  height: 100px;
+}
+
+.carItem.pending {
+  background: rgba(255, 191, 0, .5);
+}
+
+.carItem.actived {
+  /*  */
+}
+
+.carItem.reject {
+  background: rgba(255, 144, 144, 0.5);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, .5);
+  z-index: 1;
+  backdrop-filter: blur(3px);
+}
+
+.modalContent {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.modalWrap {
+  padding: 0px 10px;
+  box-sizing: border-box;
+  background: #fff;
+  width: 992px;
+  max-height: 90vh;
+  height: 100%;
+  z-index: 2;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.5);
+}

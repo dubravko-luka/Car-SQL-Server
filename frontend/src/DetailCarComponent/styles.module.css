@@ -1,0 +1,190 @@
+.wrapper {
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+}
+
+.title {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.detailPage {
+  width: 100%;
+}
+
+.detailPage>table {
+  width: 100%;
+}
+
+.detailPage table {
+  border-collapse: collapse;
+}
+
+.wrapImg {
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+
+.wrapImg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tdImg {
+  width: 60%;
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, .5);
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.tdInfo {
+  width: calc(40% - 10px);
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.tdInfoDiv {
+  width: 100%;
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, .5);
+  border-radius: 5px;
+  border: 0px;
+  margin-top: 20px;
+}
+
+.tdInfoDiv:first-child {
+  margin-top: 0px;
+}
+
+.table2 {
+  width: 100%;
+}
+
+.table2 tr td {
+  padding: 10px 15px;
+  box-sizing: border-box;
+}
+
+.table2 tr td:nth-child(1) {
+  width: 40%;
+}
+
+.backButton {
+  margin-bottom: 20px;
+}
+
+.detailNameCar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.createButton,
+.backButton {
+  height: 40px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-radius: 0px;
+  border: 0px;
+  border-radius: 20px;
+  background: var(--linear);
+  color: #fff;
+}
+
+.createButton:hover,
+.backButton:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+
+
+.showRoom {
+  padding: 10px 0px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.showRoom .avatar {
+  min-width: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  border: 1px solid #acacac;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.showRoom .avatar img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.description {
+  max-height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.description:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #fff 10%, #00000000);
+}
+
+.description.active {
+  max-height: unset !important;
+  height: auto;
+  background: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+.description.active:before {
+  content: unset;
+}
+
+.readmore {
+  margin: auto;
+  margin-top: 10px;
+  width: 134.155px;
+  height: 35px;
+  border-radius: 5px;
+  border: 0.5px solid #0277BB;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
