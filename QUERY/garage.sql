@@ -32,7 +32,7 @@ CREATE TABLE Users (
     phone VARCHAR(50) NULL,
     password NVARCHAR(MAX) NOT NULL,
     role_id INT NOT NULL,
-    avatar VARCHAR(255) DEFAULT 'https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png',
+    avatar VARCHAR(255) DEFAULT 'https://img.freepik.com/premium-vector/car-logo-vector-illustration_762078-124.jpg',
     FOREIGN KEY (role_id) REFERENCES Roles(role_id) ON DELETE CASCADE
 );
 
@@ -214,6 +214,8 @@ BEGIN
         RETURN;
     END;
 END;
+
+DROP TRIGGER UniqueUsernamePhone
 
 CREATE TRIGGER CheckCarStatus
 ON Cars
