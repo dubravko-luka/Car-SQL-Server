@@ -143,9 +143,9 @@ function CarDetailComponent() {
                                                             <span style={{ fontWeight: 'bold' }}>Người bán</span>
                                                         </td>
                                                     </tr>
-                                                    <tr className='flex justify-between w-full'>
+                                                    <tr className='w-full'>
                                                         <td colSpan={2}>
-                                                            <div className={`${styles.showRoom}`}>
+                                                            <div className={`${styles.showRoom} w-full`}>
                                                                 <div className={`${styles.avatar}`}>
                                                                     <img src={carDetail.creator_avatar} alt="" />
                                                                 </div>

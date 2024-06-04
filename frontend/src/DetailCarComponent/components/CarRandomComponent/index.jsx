@@ -10,7 +10,7 @@ const RandomCarsComponent = ({ brand_id, cate_id, car_id }) => {
     useEffect(() => {
         getRandomCars();
         // eslint-disable-next-line
-    }, []);
+    }, [brand_id, cate_id, car_id]);
 
     const getRandomCars = async () => {
         try {

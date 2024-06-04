@@ -138,7 +138,7 @@ function CarDetailComponent({ idCar }) {
                                                             <span style={{ fontWeight: 'bold' }}>Người bán</span>
                                                         </td>
                                                     </tr>
-                                                    <tr className='flex justify-between w-full'>
+                                                    <tr className='w-full'>
                                                         <td colSpan={2}>
                                                             <div className={`${styles.showRoom}`}>
                                                                 <div className={`${styles.avatar}`}>

@@ -71,8 +71,10 @@
 
   .wrapAvtarImg {
     position: relative;
-    width: 40px;
-    height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, .5);
